@@ -1,18 +1,19 @@
 import asyncio
 from playwright.async_api import async_playwright
 
-async def recoru_step1():
+async def practice_scraping():
     print("処理開始")
     async with async_playwright() as p:
         # ブラウザ起動。headless: Trueで、画面表示せずに実行する
         browser = await p.chromium.launch(headless=True)
-        
+
         # OS上に Microsoft Edge 本体がインストールされている必要があります
         # Playwrightの公式Dockerイメージにはデフォルトで
         # Chromium / Firefox / WebKit
         # のみが同梱されている。Edgeを使うには、バイナリの事前インストールが必要
         # Dockerfileでインストールするように書いてます
-        browser = await p.chromium.launch(headless=True, channel="msedge") # Edgeの場合
+
+        #browser = await p.chromium.launch(headless=True, channel="msedge") # Edgeの場合
 
         # 画面サイズを指定し、ブラウザの新規ページを開く
         context = await browser.new_context(viewport={'width': 1280, 'height': 800})
@@ -45,7 +46,12 @@ async def recoru_step1():
             await page.evaluate("console.log('Hello')")
 
             # 現在の画面の状態でスクショ
-            await page.screenshot(path='./screenshot.png')
+            await page.screenshot(path='./images/screenshot.png')
 
         finally:
             await browser.close()
+
+if __name__ == "__main__":
+    print("start")
+    asyncio.run(practice_scraping())
+
