@@ -1,0 +1,19 @@
+{
+  "name": "Python Playwright",
+  "image": "mcr.microsoft.com/playwright/python:v1.49.0-noble",
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/bin/python3"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ]
+    }
+  },
+
+  // コンテナ起動後に必要なパッケージを自動インストール（必要に応じて変更してください）
+  "postCreateCommand": "pip install --upgrade pip && pip install pytest-playwright requests"
+}
